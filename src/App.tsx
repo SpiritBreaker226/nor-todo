@@ -2,6 +2,8 @@ import React from 'react'
 
 import ErrorBoundary from './features/ErrorBoundary'
 
+import TodoForm from './features/todo/form/TodoForm'
+
 import logo from './logo.svg'
 import './App.scss'
 
@@ -12,7 +14,9 @@ function App() {
         <img src={logo} className="App-logo" alt="NorthOne" />
       </header>
 
-      <main role="main"></main>
+      <main role="main">
+        <TodoForm />
+      </main>
     </ErrorBoundary>
   )
 }
