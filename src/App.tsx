@@ -3,6 +3,7 @@ import React from 'react'
 import ErrorBoundary from './features/ErrorBoundary'
 
 import TodoForm from './features/todo/form/TodoForm'
+import TodoList from './features/todo/list/TodoList'
 
 import logo from './logo.svg'
 import './App.scss'
@@ -16,6 +17,8 @@ function App() {
 
       <main role="main">
         <TodoForm />
+
+        <TodoList />
       </main>
     </ErrorBoundary>
   )

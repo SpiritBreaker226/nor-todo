@@ -9,13 +9,23 @@ import { nanoid } from 'nanoid'
 
 import { Todo } from '../../../types/Todo'
 
-import { createTodo } from '../todoSlice'
+import { createTodo, updateTodo } from '../todoSlice'
 
-const TodoForm = () => {
+const TodoForm = ({
+  id,
+  initalTitle = '',
+  initalDescription = '',
+  initalDueDate = new Date(),
+}: {
+  id?: string
+  initalTitle?: string
+  initalDescription?: string
+  initalDueDate?: Date
+}) => {
   const dispatch = useDispatch()
-  const [title, setTitle] = useState('')
-  const [description, setDescription] = useState('')
-  const [dueDate, setDueDate] = useState(new Date())
+  const [title, setTitle] = useState(initalTitle)
+  const [description, setDescription] = useState(initalDescription)
+  const [dueDate, setDueDate] = useState(new Date(initalDueDate))
 
   const onChangeTitle = (e: ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value)
@@ -30,19 +40,25 @@ const TodoForm = () => {
   }
 
   const onClickFormAction = () => {
-    const newTodo: Todo = {
-      id: nanoid(),
-      title,
-      description,
-      dueDate: dueDate.toISOString(),
-      status: 'pending',
+    if (id) {
+      dispatch(
+        updateTodo({ id, title, description, dueDate: dueDate.toISOString() })
+      )
+    } else {
+      const newTodo: Todo = {
+        id: nanoid(),
+        title,
+        description,
+        dueDate: dueDate.toISOString(),
+        status: 'pending',
+      }
+
+      dispatch(createTodo(newTodo))
+
+      setTitle(initalTitle)
+      setDescription(initalDescription)
+      setDueDate(initalDueDate)
     }
-
-    dispatch(createTodo(newTodo))
-
-    setTitle('')
-    setDescription('')
-    setDueDate(new Date())
   }
 
   return (
@@ -73,7 +89,7 @@ const TodoForm = () => {
         showTimeInput
       />
 
-      <button onClick={onClickFormAction}>Create</button>
+      <button onClick={onClickFormAction}>{id ? 'Update' : 'Create'}</button>
     </section>
   )
 }
