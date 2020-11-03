@@ -11,6 +11,8 @@ import { Todo } from '../../../types/Todo'
 
 import { createTodo, updateTodo } from '../todoSlice'
 
+import styles from './TodoForm.module.scss'
+
 const TodoForm = ({
   id,
   initalTitle = '',
@@ -62,34 +64,53 @@ const TodoForm = ({
   }
 
   return (
-    <section className="todoForm">
-      <label htmlFor="title">Title</label>
-      <input
-        id="title"
-        value={title}
-        type="text"
-        onChange={onChangeTitle}
-        required
-      />
+    <section className={styles.todoFormBody}>
+      <div className={styles.todoForm}>
+        <div className={styles.field}>
+          <div className={styles.fieldLabel}>
+            <label htmlFor="title">Title</label>
+          </div>
 
-      <label htmlFor="description">Description</label>
-      <textarea
-        id="description"
-        value={description}
-        onChange={onChangeDescription}
-        required
-      />
+          <input
+            id="title"
+            value={title}
+            type="text"
+            onChange={onChangeTitle}
+            required
+          />
+        </div>
 
-      <label htmlFor="description">Due Date</label>
-      <DatePicker
-        selected={dueDate}
-        onChange={onChangeDueDate}
-        timeInputLabel="Time:"
-        dateFormat="MM/dd/yyyy h:mm aa"
-        showTimeInput
-      />
+        <div className={styles.field}>
+          <div className={styles.fieldLabel}>
+            <label htmlFor="description">Description</label>
+          </div>
 
-      <button onClick={onClickFormAction}>{id ? 'Update' : 'Create'}</button>
+          <textarea
+            id="description"
+            value={description}
+            onChange={onChangeDescription}
+            required
+          />
+        </div>
+
+        <div className={styles.field}>
+          <div className={styles.fieldLabel}>
+            <label htmlFor="description">Due Date</label>
+          </div>
+
+          <DatePicker
+            selected={dueDate}
+            onChange={onChangeDueDate}
+            timeInputLabel="Time:"
+            dateFormat="MM/dd/yyyy h:mm aa"
+            showTimeInput
+          />
+        </div>
+
+        <button className={styles.button} onClick={onClickFormAction}>
+          {id ? 'Update' : 'Create'}
+        </button>
+      </div>
     </section>
   )
 }
