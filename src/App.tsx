@@ -6,7 +6,6 @@ import TodoForm from './features/todo/form/TodoForm'
 import TodoList from './features/todo/list/TodoList'
 
 import logo from './logo.svg'
-import './App.scss'
 
 function App() {
   return (
