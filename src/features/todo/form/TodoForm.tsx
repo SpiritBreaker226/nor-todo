@@ -11,8 +11,6 @@ import { Todo } from '../../../types/Todo'
 
 import { createTodo, updateTodo } from '../todoSlice'
 
-import styles from './TodoForm.module.scss'
-
 const TodoForm = ({
   id,
   initalTitle = '',
